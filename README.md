@@ -75,7 +75,7 @@ Sigue estos pasos para levantar el proyecto en un entorno de desarrollo local.
 ### Configuración
 
 1.  En la raíz del proyecto, crea un archivo llamado `.env`.
-2.  Copia y pega la siguiente estructura en tu archivo `.env` y rellena los valores con tus propias credenciales. **¡Este archivo nunca debe ser compartido**
+2.  Copia y pega la siguiente estructura en tu archivo `.env` y rellena los valores con tus propias credenciales. **¡Este archivo nunca debe ser compartido!**
 
     ```env
     # Clave secreta de Flask para la seguridad de la sesión
