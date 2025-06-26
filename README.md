@@ -52,7 +52,7 @@ Sigue estos pasos para levantar el proyecto en un entorno de desarrollo local.
 1.  **Clonar el repositorio:**
     ```bash
     git clone https://github.com/saumontsz/UniAccess
-    cd UniAcces_prev1.2 - beta
+    cd UniAccess
     ```
 
 2.  **Crear y activar un entorno virtual:**
