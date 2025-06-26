@@ -1,6 +1,6 @@
 # UniAccess - Sistema de Reserva de Salas Inteligentes
 
-!UniAccess es una aplicación web diseñada para la gestión y reserva de espacios de estudio y salas de reuniones en la Universidad Mayor. Integra cerraduras inteligentes TTLock para proporcionar un acceso seguro y sin llaves, y utiliza la autenticación de Microsoft para validar a los usuarios institucionales.
+UniAccess es una aplicación web diseñada para la gestión y reserva de espacios de estudio y salas de reuniones en la Universidad Mayor. Integra cerraduras inteligentes TTLock para proporcionar un acceso seguro y sin llaves, y utiliza la autenticación de Microsoft para validar a los usuarios institucionales.
 
 ---
 
