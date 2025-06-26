@@ -1,0 +1,27 @@
+    {% extends "layout.html" %}
+    {% block title %}Añadir Usuario{% endblock %}
+    {% block content %}
+    <div class="max-w-xl mx-auto bg-white p-8 rounded-xl shadow-lg">
+        <h2 class="text-2xl font-bold text-gray-800 mb-6">Crear Nuevo Usuario</h2>
+        <form method="POST" class="space-y-6">
+            <div>
+                <label for="nombre" class="block text-sm font-medium text-gray-700">Nombre Completo</label>
+                <input type="text" id="nombre" name="nombre" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-u-yellow-500 focus:border-u-yellow-500">
+            </div>
+            <div>
+                <label for="email" class="block text-sm font-medium text-gray-700">Email Institucional</label>
+                <input type="email" id="email" name="email" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-u-yellow-500 focus:border-u-yellow-500">
+            </div>
+            <div class="flex items-center">
+                <input id="is_admin" name="is_admin" type="checkbox" class="h-4 w-4 text-u-yellow-600 border-gray-300 rounded focus:ring-u-yellow-500">
+                <label for="is_admin" class="ml-2 block text-sm text-gray-900">¿Es Administrador?</label>
+            </div>
+            <p class="text-xs text-gray-500">Nota: Los usuarios creados deberán iniciar sesión con su cuenta de Microsoft. No se les asigna una contraseña.</p>
+            <div class="flex space-x-4">
+                <a href="{{ url_for('manage_users') }}" class="w-1/2 flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">Cancelar</a>
+                <button type="submit" class="w-1/2 flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-u-yellow-500 hover:bg-u-yellow-600">Crear Usuario</button>
+            </div>
+        </form>
+    </div>
+    {% endblock %}
+    

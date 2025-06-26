@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block title %}Panel de Reservas{% endblock %}
+
+{% block content %}
+<div class="bg-white p-6 md:p-8 rounded-xl shadow-lg">
+    <div class="flex flex-col md:flex-row justify-between md:items-center mb-6">
+        <div>
+            <h1 class="text-3xl font-bold text-gray-900">Panel Principal</h1>
+            <p class="mt-1 text-gray-600">Bienvenido, {{ current_user.nombre }}. Selecciona una sala para ver su disponibilidad.</p>
+        </div>
+    </div>
+    <hr class="my-6">
+    <div class="space-y-4">
+        {% if salas %}
+            {% for sala in salas %}
+                {% if sala.id_ttlock > 0 %}
+                    <div class="bg-gray-50 rounded-lg p-4 sm:p-6 flex flex-col sm:flex-row justify-between sm:items-center border border-gray-200 hover:shadow-md transition-shadow">
+                        <span class="font-semibold text-gray-700 mb-4 sm:mb-0">{{ sala.nombre }}</span>
+                        {# --- CORRECCIÓN AQUÍ --- #}
+                        {# El enlace ahora apunta a la ruta 'ver_sala' sin parámetros de fecha, #}
+                        {# ya que la ruta se encargará de redirigir al día de hoy por defecto. #}
+                        <a href="{{ url_for('ver_sala', id_sala=sala.id) }}" class="shrink-0 w-full sm:w-auto text-center px-4 py-2 bg-u-yellow-500 text-white rounded-md hover:bg-u-yellow-600 transition-colors text-sm font-medium">Ver y Reservar</a>
+                    </div>
+                {% else %}
+                    <div class="bg-gray-100 rounded-lg p-4 sm:p-6 flex flex-col sm:flex-row justify-between sm:items-center border border-gray-200 opacity-60">
+                        <span class="font-semibold text-gray-500 mb-4 sm:mb-0">{{ sala.nombre }}</span>
+                        <span class="shrink-0 w-full sm:w-auto text-center px-4 py-2 bg-gray-300 text-gray-600 rounded-md cursor-not-allowed text-sm font-medium">No disponible</span>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% else %}
+            <p class="text-gray-500">No hay salas configuradas en el sistema.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

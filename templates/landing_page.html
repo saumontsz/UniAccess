@@ -1,0 +1,74 @@
+{% extends "layout.html" %}
+{% block title %}UniAccess - Reserva de Salas Inteligente{% endblock %}
+
+{% block content %}
+<!-- Sección Principal con Imagen de Fondo -->
+<div class="relative h-[60vh] md:h-[70vh] bg-cover bg-center text-white flex items-center justify-center text-center" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2071&auto=format&fit=crop');">
+    <div class="px-4">
+        <h1 class="text-4xl md:text-6xl font-extrabold leading-tight">
+            Reserva Espacios de Estudio <br class="hidden md:block"> con <span class="text-u-yellow-500">Facilidad y Rapidez</span>.
+        </h1>
+        <p class="mt-6 max-w-2xl mx-auto text-lg text-gray-200">
+            UniAccess es la plataforma diseñada para estudiantes de la Universidad Mayor. Encuentra y reserva salas de estudio equipadas con cerraduras inteligentes en segundos. Olvídate de las llaves y las complicaciones.
+        </p>
+        <div class="mt-10">
+            <a href="{{ url_for('login') }}" class="inline-block bg-u-yellow-500 text-white font-bold text-lg px-8 py-4 rounded-lg shadow-lg hover:bg-u-yellow-600 transition-transform transform hover:scale-105">
+                Comenzar a Reservar
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Contenedor Principal para el resto del contenido -->
+<div class="container mx-auto p-4 md:p-8 max-w-5xl">
+    
+    <!-- Sección Sobre Nosotros -->
+    <section id="sobre-nosotros" class="py-16">
+        <div class="text-center">
+            <h2 class="text-3xl font-bold text-gray-900">Sobre UniAccess</h2>
+            <p class="mt-4 max-w-3xl mx-auto text-gray-600">
+                Nacimos de la necesidad de modernizar y simplificar el acceso a los recursos universitarios. Creemos que la tecnología debe facilitar la vida académica, no complicarla. Por eso, hemos desarrollado un sistema intuitivo que integra cerraduras inteligentes para que los estudiantes puedan enfocarse en lo que realmente importa: su educación.
+            </p>
+        </div>
+    </section>
+    
+    <hr class="my-8">
+
+    <!-- Sección de Contacto para Empresas -->
+    <section id="contacto" class="py-16 bg-gray-50 rounded-xl">
+        <div class="text-center max-w-2xl mx-auto">
+             {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert-{{ category }} p-4 mb-6 rounded-lg border font-semibold text-left" role="alert">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <h2 class="text-3xl font-bold text-gray-900">¿Interesado en implementar las cerraduras en tu empresa?</h2>
+            <p class="mt-4 text-gray-600">
+                Nuestra tecnología es adaptable a oficinas, coworkings y otras instituciones. Contáctanos para una demostración.
+            </p>
+            <form action="{{ url_for('contacto') }}" method="POST" class="mt-8 space-y-4 text-left">
+                <div>
+                    <label for="nombre_empresa" class="block text-sm font-medium text-gray-700">Nombre de la Empresa</label>
+                    <input type="text" name="nombre_empresa" id="nombre_empresa" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-u-yellow-500 focus:border-u-yellow-500">
+                </div>
+                <div>
+                    <label for="email_contacto" class="block text-sm font-medium text-gray-700">Email de Contacto</label>
+                    <input type="email" name="email_contacto" id="email_contacto" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-u-yellow-500 focus:border-u-yellow-500">
+                </div>
+                <div>
+                    <label for="mensaje" class="block text-sm font-medium text-gray-700">Mensaje</label>
+                    <textarea name="mensaje" id="mensaje" rows="4" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-u-yellow-500 focus:border-u-yellow-500"></textarea>
+                </div>
+                <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-gray-800 hover:bg-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900">
+                    Enviar Consulta
+                </button>
+            </form>
+        </div>
+    </section>
+
+</div>
+{% endblock %}

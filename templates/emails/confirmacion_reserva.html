@@ -1,0 +1,10 @@
+    <p>Hola {{ nombre_usuario }},</p>
+    <p>Tu reserva para la sala <strong>{{ sala.nombre }}</strong> ha sido confirmada con éxito.</p>
+    <p>Estos son los detalles:</p>
+    <ul>
+        <li><strong>Fecha:</strong> {{ reserva.fecha_inicio.strftime('%d-%m-%Y') }}</li>
+        <li><strong>Horario:</strong> de {{ reserva.fecha_inicio.strftime('%H:%M') }} a {{ reserva.fecha_fin.strftime('%H:%M') }}</li>
+        <li><strong>Código de Acceso:</strong> <h1>{{ reserva.codigo_acceso }}</h1></li>
+    </ul>
+    <p>Gracias por usar UniAccess.</p>
+    

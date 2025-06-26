@@ -1,0 +1,40 @@
+    {% extends "layout.html" %}
+    {% block title %}Gestionar Usuarios{% endblock %}
+    {% block content %}
+    <div class="bg-white p-6 md:p-8 rounded-xl shadow-lg">
+        <div class="flex justify-between items-center mb-6">
+            <h1 class="text-2xl font-bold text-gray-900">Gestión de Usuarios</h1>
+            <a href="{{ url_for('add_user') }}" class="bg-u-yellow-500 text-white px-4 py-2 rounded-md hover:bg-u-yellow-600">Añadir Usuario</a>
+        </div>
+        <div class="overflow-x-auto">
+            <table class="w-full text-sm text-left">
+                <thead class="bg-gray-50 text-xs text-gray-700 uppercase">
+                    <tr>
+                        <th class="px-6 py-3">Nombre</th>
+                        <th class="px-6 py-3">Email</th>
+                        <th class="px-6 py-3">Rol</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for user in users %}
+                    <tr class="bg-white border-b hover:bg-gray-50">
+                        <td class="px-6 py-4 font-medium">{{ user.nombre }}</td>
+                        <td class="px-6 py-4">{{ user.email }}</td>
+                        <td class="px-6 py-4">
+                            {% if user.is_admin %}
+                                <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full">Admin</span>
+                            {% else %}
+                                <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full">Estudiante</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr><td colspan="3" class="px-6 py-4 text-center">No hay usuarios registrados.</td></tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <a href="{{ url_for('dashboard') }}" class="inline-block mt-6 px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700">Volver al Panel</a>
+    </div>
+    {% endblock %}
+    

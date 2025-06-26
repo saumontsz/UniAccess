@@ -1,0 +1,74 @@
+{% extends "layout.html" %}
+
+{% block title %}Mis Reservas{% endblock %}
+
+{% block content %}
+<div class="bg-white p-6 md:p-8 rounded-xl shadow-lg">
+    <div class="flex justify-between items-center mb-6">
+        <h1 class="text-2xl font-bold text-gray-900">Mis Reservas</h1>
+        <a href="{{ url_for('dashboard') }}" class="text-sm text-u-yellow-600 hover:text-u-yellow-500">&larr; Volver al Panel</a>
+    </div>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert-{{ category }} p-4 mb-6 rounded-lg border font-semibold" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <div class="overflow-x-auto">
+        <table class="w-full text-sm text-left">
+            <thead class="bg-gray-50 text-xs text-gray-700 uppercase">
+                <tr>
+                    <th class="px-6 py-3">Sala</th>
+                    <th class="px-6 py-3">Inicio</th>
+                    <th class="px-6 py-3">Fin</th>
+                    <th class="px-6 py-3">Código de Acceso</th>
+                    <th class="px-6 py-3">Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+            {# Usamos la variable 'reservas' que pasamos desde app.py #}
+            {% for reserva in reservas %}
+                <tr class="bg-white border-b hover:bg-gray-50">
+                    <td class="px-6 py-4 font-medium text-gray-900">{{ reserva.sala.nombre }}</td>
+                    <td class="px-6 py-4">{{ reserva.fecha_inicio.strftime('%d-%m-%Y %H:%M') }}</td>
+                    <td class="px-6 py-4">{{ reserva.fecha_fin.strftime('%d-%m-%Y %H:%M') }}</td>
+                    <td class="px-6 py-4 font-mono font-bold text-lg">{{ reserva.codigo_acceso }}</td>
+                    <td class="px-6 py-4">
+                        {# Mostramos el botón solo si la reserva es en el futuro #}
+                        {% if reserva.fecha_inicio > now %}
+                            <form method="POST" action="{{ url_for('cancelar_mi_reserva', reserva_id=reserva.id) }}" onsubmit="return confirmarCancelacion(this)">
+                                <button type="submit" 
+                                        data-sala-nombre="{{ reserva.sala.nombre }}"
+                                        data-fecha-reserva="{{ reserva.fecha_inicio.strftime('%d-%m-%Y a las %H:%M') }}"
+                                        class="px-3 py-1 text-xs font-medium text-white bg-red-600 rounded-md hover:bg-red-700">
+                                    Cancelar
+                                </button>
+                            </form>
+                        {% else %}
+                            <span class="px-3 py-1 text-xs font-medium text-gray-500 bg-gray-200 rounded-md">Finalizada</span>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% else %}
+                <tr><td colspan="5" class="px-6 py-4 text-center text-gray-500">No tienes ninguna reserva.</td></tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    function confirmarCancelacion(formElement) {
+        const button = formElement.querySelector('button');
+        const nombreSala = button.dataset.salaNombre;
+        const fecha = button.dataset.fechaReserva;
+        const mensaje = `¿Estás seguro que quieres cancelar tu reserva para la sala "${nombreSala}" del día ${fecha}?`;
+        return window.confirm(mensaje);
+    }
+</script>
+{% endblock %}
